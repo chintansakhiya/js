@@ -12,11 +12,10 @@ async function getData() {
     const start = Date.now();
     let x = await fetch("https://api.github.com/users",{
         method:"GET",
-
         Headers:{
             "x-ratelimit-limit": 60
         }
-        // x-ratelimit-limit: 60, 
+ 
     })
     const end = Date.now();
     const millis = end - start
@@ -30,13 +29,13 @@ async function getData() {
 
 
 function x(){ 
-let y=true
+let y=false
    y=getData()
-//   console.log(y)
+ 
 if (y==false){
+    twirlTimer()
 }
 else{
-    twirlTimer()
 }
 
 
