@@ -1,19 +1,25 @@
 // import fetch from "node-fetch"
 //get uuid 
 async function getUUID() {
+    console.time("get uuid")
     let res = await fetch("https://httpbin.org/uuid")
     let data = await res.json()
+    console.timeEnd("get uuid")
     return data
 }
 
 //delay
 async function delayed(delay) {
-    let res = await fetch(`https://httpbin.org/delay/${delay}`)
+    console.time("delay")
+    let res = await fetch(`https://httpbin.org/delay/${delay}`)    
+    console.timeEnd("delay")
+    return true
     
 }
 
 //post data
 async function postBody(body) {
+    console.time("anything")
     let res = await fetch(`https://httpbin.org/anything/}`, {
         method: "POST",
         headers: {
@@ -22,6 +28,7 @@ async function postBody(body) {
         body: JSON.stringify(body)
     })
     let data = await res.json()
+    console.timeEnd("anything")
     return data
 }
 
@@ -36,11 +43,12 @@ async function postBody(body) {
 //   })
 
 async function run() {
+    let startTime = new Date().getTime()
     let uuid = getUUID()
-    delayed(2)
+    let m = delayed(2)
     let data =await postBody(await uuid)
+    await m
     let endTime=new Date().getTime()
     console.log(data.data,(endTime-startTime)/1000+"s");
 }
-let startTime = new Date().getTime()
 run()
